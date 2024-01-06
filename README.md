@@ -14,7 +14,7 @@ BitBooks is a web program that helps users track a list of books they have or in
 
 ## 3rd Party Technologies Used:
 - [Sass](https://sass-lang.com/)
-- [Normalise (SCSS)]()
+- [SCSS Reset](https://www.npmjs.com/package/scss-reset)
 
 ## Notes:
 This project is based on [project 8 (Library)](https://www.theodinproject.com/lessons/node-path-javascript-library) of the Full Stack JavaScript course offered by [The Odin Project](https://www.theodinproject.com/dashboard) under the Javascript course.
