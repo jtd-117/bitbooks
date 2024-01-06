@@ -160,3 +160,43 @@ class Book {
         return CMPValues.EQUAL;
     }
 }
+
+/**
+ * @description Stores a collection of 'Book' instances.
+ */
+class Library {
+    
+    /**
+     * @description A list of books in the user library.
+     * @type {Array}
+     */
+    #list
+
+    constructor() {
+        this.#list = [];
+    }
+
+    get list() {
+        return this.#list;
+    }
+
+    /**
+     * @description     Adds a book into the library's list.
+     * @param {Book}    book The book to be added to the library.
+     */
+    addBook(book) {
+        if (book instanceof Book === false) {
+            throw new TypeError("book must be of type 'Book'!");
+        }
+        book.dateTimeAdded = new Date();
+        this.list.push(book);
+    }
+
+    /**
+     * @description         Sorts the list of books by a specific property.
+     * @param {Function}    cmpFn Compares the a property of 2 books
+     */
+    sortBooks(cmpFn) {
+        this.list.sort((b1, b2) => cmpFn(b1, b2));
+    }
+}
