@@ -1,0 +1,22 @@
+
+@mixin header-styles {
+    header {
+        @content;
+    }
+}
+
+// NOTE: filepath is relative to the compiled CSS file
+@font-face {
+    font-family: 'checkbook';
+    src: url('assets/bitbooks-logo-font.TTF');
+}
+
+header {
+    padding: 1rem;
+    background-color: whitesmoke;
+
+    h1 {
+        font-size: 2rem;
+        font-family: 'checkbook';
+    }
+}

@@ -1,7 +1,11 @@
 // Source: https://www.npmjs.com/package/scss-reset
 @use '../node_modules/scss-reset/reset';
 
+@use './components/header';
+
 body {
     display: flex;
     flex-direction: column;
+
+    @include header.header-styles;
 }
