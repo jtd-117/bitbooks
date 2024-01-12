@@ -1,0 +1,12 @@
+
+@mixin library-styles {
+    section#library {
+        @content;
+    }
+}
+
+section#library {
+    flex-grow: 1;
+
+    background-color: white;
+}
