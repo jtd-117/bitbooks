@@ -5,18 +5,15 @@
     }
 }
 
-// NOTE: filepath is relative to the compiled CSS file
-@font-face {
-    font-family: 'checkbook';
-    src: url('assets/bitbooks-logo-font.TTF');
-}
-
 header {
     padding: 1rem;
-    background-color: whitesmoke;
+
+    display: flex;
+    align-items: center;
 
     h1 {
+        margin: auto;
+
         font-size: 2rem;
-        font-family: 'checkbook';
     }
 }
