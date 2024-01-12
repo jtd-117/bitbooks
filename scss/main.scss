@@ -2,10 +2,12 @@
 @use '../node_modules/scss-reset/reset';
 
 @use './components/header';
+@use './components/content';
 
 body {
     display: flex;
     flex-direction: column;
 
     @include header.header-styles;
+    @include content.main-styles;
 }

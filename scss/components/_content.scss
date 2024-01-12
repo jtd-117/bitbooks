@@ -1,0 +1,17 @@
+
+@use './nav';
+
+@mixin main-styles {
+    main {
+        @content;
+    }
+}
+
+main {
+    display: grid;
+    flex-direction: column;
+    
+    background-color: #e0e0e0;
+
+    @include nav.nav-styles;
+}
