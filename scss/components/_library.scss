@@ -1,4 +1,6 @@
 
+@use './book';
+
 @mixin library-styles {
     section#library {
         @content;
@@ -6,7 +8,15 @@
 }
 
 section#library {
-    flex-grow: 1;
+    padding-inline: 5rem;
+    padding-block: 1rem;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 0.5fr));
+    justify-content: center;
+    gap: 10px;
 
     background-color: white;
+
+    @include book.book-styles;
 }
