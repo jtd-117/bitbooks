@@ -162,9 +162,10 @@ class Book {
 }
 
 /**
+ * @class LibraryModel
  * @description Stores a collection of 'Book' instances.
  */
-class Library {
+class LibraryModel {
     
     /**
      * @description A list of books in the user library.
