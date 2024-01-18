@@ -8,10 +8,15 @@ nav {
     padding: 1rem;
 
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
 
     top: 0;
     position: sticky;
 
     background-color: whitesmoke;
+
+    input,
+    .sort-container {
+        padding-inline: 1.4rem;
+    }
 }
