@@ -1,0 +1,19 @@
+
+@mixin footer-styles {
+    footer {
+        @content;
+    }
+}
+
+footer {
+    padding: 1rem;
+
+    display: flex;
+    justify-content: center;
+
+    background-color: whitesmoke;
+
+    h2 {
+        font-size: 1.2rem;
+    }
+}
