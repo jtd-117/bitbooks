@@ -182,14 +182,19 @@ class Library {
 
     /**
      * @description     Adds a book into the library's list.
-     * @param {Book}    book The book to be added to the library.
+     * @param {String}  title 
+     * @param {String}  author 
+     * @param {Number}  pages 
+     * @param {Boolean} hasRead 
      */
-    addBook(book) {
-        if (book instanceof Book === false) {
-            throw new TypeError("book must be of type 'Book'!");
-        }
-        book.dateTimeAdded = new Date();
-        this.list.push(book);
+    addBook(title, author, pages, hasRead) {
+
+        // STEP 1: Do not add the book if it's title exists
+        if (this.list.find(book => book.title === title)) return;
+
+        // STEP 2: Create the new instance of the book & add it to the list
+        const newBook = new Book(title, author, pages, hasRead);
+        this.list.push(newBook);
     }
 
     /**
