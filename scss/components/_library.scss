@@ -8,13 +8,13 @@
 }
 
 section#library {
-    padding-inline: 5rem;
+    padding-inline: 6rem;
     padding-block: 1rem;
 
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 0.5fr));
     justify-content: center;
-    gap: 10px;
+    gap: 2rem;
 
     background-color: white;
 
