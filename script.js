@@ -225,3 +225,15 @@ class LibraryController {
         
     }
 }
+
+/**
+ * @class LibraryView
+ * @description Renders any changes of the LibraryModel that were 
+ *              invoked by the LibraryController.
+ */
+class LibraryView {
+
+    constructor() {
+        
+    }
+}
