@@ -3,6 +3,7 @@
 
 @use './components/header';
 @use './components/content';
+@use './components/footer';
 
 body {
     display: flex;
@@ -10,4 +11,5 @@ body {
 
     @include header.header-styles;
     @include content.main-styles;
+    @include footer.footer-styles;
 }
