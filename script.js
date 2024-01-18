@@ -1,6 +1,7 @@
 /**
  * @file script.js
- * @description A file for implementing the BitBooks logic
+ * @description Implements the BitBook logic by using the 
+ *              Model-Controller-View (MVC) design pattern.
  */
 
 /**
@@ -204,5 +205,23 @@ class LibraryModel {
      */
     sortBooks(cmpFn) {
         this.list.sort((b1, b2) => cmpFn(b1, b2));
+    }
+}
+
+/**
+ * @class LibraryController
+ * @description Handles event listeners for buttons
+ */
+class LibraryController {
+
+    constructor() {
+        this.#init();
+    }
+
+    /**
+     * @description Initialises all the event listeners
+     */
+    #init() {
+        
     }
 }
