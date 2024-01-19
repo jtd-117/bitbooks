@@ -24,17 +24,46 @@
             </div>
             <input type="button" id="add-book" value="+" title="new">
         </nav>
+
+        <dialog id="add-book-form">
+            <form method="dialog">
+                <h2>Book Details:</h2>
+                <div class="label-input-container">
+                    <label for="book-title">Title:</label>
+                    <input type="text" id="book-title" name="book-title">
+                </div>
+                <div class="label-input-container">
+                    <label for="book-author">Author:</label>
+                    <input type="text" id="book-author" name="book-author">
+                </div>
+                <div class="label-input-container">
+                    <label for="book-pages">Pages:</label>
+                    <input type="number" id="book-pages" name="book-pages">
+                </div>
+                <div class="label-input-container">
+                    <label for="book-status">Status:</label>
+                    <select name="book-status" id="book-status">
+                        <option value="read">Read</option>
+                        <option value="unread">Unread</option>
+                    </select>
+                </div>
+                <button id="cancel-book" formmethod="dialog" type="submit">Cancel</button>
+                <button id="submit-book" type="submit">Submit</button>
+            </form>
+        </dialog>
+
         <section id="library">
             <div class="book">
                 <span class="title">Halo: The fall of Reach</span>
                 <span class="author">Eric Nyland</span>
-                <div class="book-pages">
+                <div class="label-input-container">
                     <label>Pages:</label>
                     <span>117</span>
                 </div>
                 <input type="button" id="status" name="status" value="Read">
                 <input type="button" value="Delete">
             </div>
+        </section>
     </main>
     <footer>
         <h2>
