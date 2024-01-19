@@ -197,6 +197,10 @@ class LibraryModel {
         // STEP 2: Create the new instance of the book & add it to the list
         const newBook = new Book(title, author, pages, hasRead);
         this.list.push(newBook);
+
+
+
+        console.log(this.list);
     }
 
     /**
@@ -243,7 +247,8 @@ class LibraryController {
         // STEP 4: Event for form submission & cancellations
         const submitBookBtn = document.getElementById('submit-book');
         const cancelBookBtn = document.getElementById('cancel-book');
-        //submitBookBtn.addEventListener('submit', () => );
+        submitBookBtn.addEventListener('click', () => this.#addBook());
+        cancelBookBtn.addEventListener('click', () => this.#resetBookForm());
     }
 
     /**
@@ -276,14 +281,43 @@ class LibraryController {
     }
 
     /**
-     * @description     Calls the LibraryModel to add a book
-     * @param {String}  title   The title of the book
-     * @param {String}  author  The person who wrote the book  
-     * @param {Number}  pages   The number of pages the book has
-     * @param {Boolean} hasRead Indicates if the book has been read
+     * @description Resets the book form after submission/cancellation
      */
-    #addBook(title, author, pages, hasRead) {
+    #resetBookForm() {
 
+        // STEP 1: Get the book values
+        let bookTitle = document.getElementById('book-title');
+        let bookAuthor = document.getElementById('book-author');
+        let bookPages = document.getElementById('book-pages');
+        let bookStatus = document.getElementById('book-status');
+
+        // STEP 2: Reset the book values
+        bookTitle.value = '';
+        bookAuthor.value = '';
+        bookPages.value = '';
+        bookStatus.value = '';
+    }
+
+    /**
+     * @description     Calls the LibraryModel to add a book
+     */
+    #addBook() {
+
+        // STEP 1: Get the book values
+        const bookTitle = document.getElementById('book-title').value;
+        const bookAuthor = document.getElementById('book-author').value;
+        const bookPages = document.getElementById('book-pages').value;
+        const bookStatus = document.getElementById('book-status').value;
+        
+        // STEP 2: Convert book status into a boolean
+        let bookStatusBoolean = false;
+        if (bookStatus === 'read') bookStatusBoolean = true;
+
+        // STEP 3: Call the library model to add the new book
+        this.#libraryModel.addBook(bookTitle, bookAuthor, bookPages, bookStatusBoolean);
+
+        // STEP 4: Reset the form
+        this.#resetBookForm();
     }
 }
 
