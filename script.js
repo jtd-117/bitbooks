@@ -234,7 +234,7 @@ class LibraryController {
         
         // STEP 2: Event for sorting books
         const sortByBtn = document.getElementById('sort-by');
-        sortByBtn.addEventListener('change', this.#sortBooks(sortByBtn.value));
+        sortByBtn.addEventListener('change', () => this.#sortBooks(sortByBtn.value));
 
         // STEP 3: Event for adding books
         const addBookBtn = document.getElementById('add-book');
