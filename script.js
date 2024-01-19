@@ -236,9 +236,14 @@ class LibraryController {
         const sortByBtn = document.getElementById('sort-by');
         sortByBtn.addEventListener('change', () => this.#sortBooks(sortByBtn.value));
 
-        // STEP 3: Event for adding books
+        // STEP 3: Event for dialog-modal form popup
         const addBookBtn = document.getElementById('add-book');
-        //addBookBtn.addEventListener('click', );
+        addBookBtn.addEventListener('click', () => this.#openBookForm());
+        
+        // STEP 4: Event for form submission & cancellations
+        const submitBookBtn = document.getElementById('submit-book');
+        const cancelBookBtn = document.getElementById('cancel-book');
+        //submitBookBtn.addEventListener('submit', () => );
     }
 
     /**
@@ -260,6 +265,14 @@ class LibraryController {
             this.#libraryModel.sortBooks(Book.cmpPages);
         }
         console.log(sortOption);
+    }
+    
+    /**
+     * @description Opens up the add book form when clicking + button
+     */
+    #openBookForm() {
+        const addBookForm = document.getElementById('add-book-form');
+        addBookForm.showModal();
     }
 
     /**
