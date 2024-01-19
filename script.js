@@ -214,15 +214,50 @@ class LibraryModel {
  */
 class LibraryController {
 
-    constructor() {
-        this.#init();
+    static sortValues = Object.freeze({
+        ADDED: "added",
+        TITLE: "title",
+        AUTHOR: "author",
+        PAGES: "pages",
+    });
+
+    /**
+     * @class LibraryModel
+     * @description An instance of the library model the controller will manipulate
+     */
+    #libraryModel;
+
+    constructor(libraryModel) {
+
+        // STEP 1: Assign the LibraryModel
+        this.#libraryModel = libraryModel
+        
+        // STEP 2: Event for sorting books
+        const sortBy = document.getElementById('sort-by');
+        sortBy.addEventListener('change', this.#sortBooks(sortBy.value));
+
+        // STEP 3: Event for adding books
     }
 
     /**
-     * @description Initialises all the event listeners
+     * @description     Calls the LibraryModel to sort the books
+     * @param {String}  sortOption the method to sort the books
      */
-    #init() {
-        
+    #sortBooks(sortOption) {
+
+        if (sortOption === LibraryController.sortValues.ADDED) {
+            this.#libraryModel.sortBooks(Book.cmpDateTimeAdded);
+
+        } else if (sortOption === LibraryController.sortValues.TITLE) {
+            this.#libraryModel.sortBooks(Book.cmpTitle);
+
+        } else if (sortOption === LibraryController.sortValues.AUTHOR) {
+            this.#libraryModel.sortBooks(Book.cmpAuthor);
+
+        } else {
+            this.#libraryModel.sortBooks(Book.cmpPages);
+        }
+        console.log(sortOption);
     }
 }
 
@@ -234,6 +269,12 @@ class LibraryController {
 class LibraryView {
 
     constructor() {
-        
+
     }
 }
+
+// Set up the model, viewer & controller
+const model = new LibraryModel();
+model.sortBooks(Book.cmpAuthor);
+
+const controller = new LibraryController(model);
