@@ -291,11 +291,12 @@ class LibraryController {
         let bookPages = document.getElementById('book-pages');
         let bookStatus = document.getElementById('book-status');
 
-        // STEP 2: Reset the book values
+        // STEP 2: Reset the book values & close the modal
         bookTitle.value = '';
         bookAuthor.value = '';
         bookPages.value = '';
-        bookStatus.value = '';
+        bookStatus.value = 'read';
+        document.getElementById('add-book-form').close();
     }
 
     /**
