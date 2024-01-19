@@ -50,10 +50,10 @@ class Book {
 
     /**
      * @constructor
-     * @param {String}  title 
-     * @param {String}  author 
-     * @param {Number}  pages 
-     * @param {Boolean} hasRead 
+     * @param {String}  title   The title of the book
+     * @param {String}  author  The person who wrote the book  
+     * @param {Number}  pages   The number of pages the book has
+     * @param {Boolean} hasRead Indicates if the book has been read
      */
     constructor(title, author, pages, hasRead) {
         this.#title = title;
@@ -184,10 +184,10 @@ class LibraryModel {
 
     /**
      * @description     Adds a book into the library's list.
-     * @param {String}  title 
-     * @param {String}  author 
-     * @param {Number}  pages 
-     * @param {Boolean} hasRead 
+     * @param {String}  title   The title of the book
+     * @param {String}  author  The person who wrote the book  
+     * @param {Number}  pages   The number of pages the book has
+     * @param {Boolean} hasRead Indicates if the book has been read
      */
     addBook(title, author, pages, hasRead) {
 
@@ -233,10 +233,12 @@ class LibraryController {
         this.#libraryModel = libraryModel
         
         // STEP 2: Event for sorting books
-        const sortBy = document.getElementById('sort-by');
-        sortBy.addEventListener('change', this.#sortBooks(sortBy.value));
+        const sortByBtn = document.getElementById('sort-by');
+        sortByBtn.addEventListener('change', this.#sortBooks(sortByBtn.value));
 
         // STEP 3: Event for adding books
+        const addBookBtn = document.getElementById('add-book');
+        //addBookBtn.addEventListener('click', );
     }
 
     /**
@@ -259,6 +261,17 @@ class LibraryController {
         }
         console.log(sortOption);
     }
+
+    /**
+     * @description     Calls the LibraryModel to add a book
+     * @param {String}  title   The title of the book
+     * @param {String}  author  The person who wrote the book  
+     * @param {Number}  pages   The number of pages the book has
+     * @param {Boolean} hasRead Indicates if the book has been read
+     */
+    #addBook(title, author, pages, hasRead) {
+
+    }
 }
 
 /**
@@ -275,6 +288,4 @@ class LibraryView {
 
 // Set up the model, viewer & controller
 const model = new LibraryModel();
-model.sortBooks(Book.cmpAuthor);
-
 const controller = new LibraryController(model);
