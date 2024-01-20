@@ -8,9 +8,8 @@
 .book {
     padding: 1rem;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    text-align: center;
+    word-wrap: break-word;
 
     border: 1px solid black;
     border-radius: 10px;
