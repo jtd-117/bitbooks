@@ -287,15 +287,15 @@ class LibraryModel {
      * @description A list of books in the user library.
      * @type {Array}
      */
-    #list;
+    #books;
 
     constructor() {
         this.#libraryView = new LibraryView();
-        this.#list = [];
+        this.#books = [];
     }
 
-    get list() {
-        return this.#list;
+    get books() {
+        return this.#books;
     }
 
     /**
@@ -308,14 +308,13 @@ class LibraryModel {
     addBook(title, author, pages, hasRead) {
 
         // STEP 1: Do not add the book if it's title exists
-        if (this.list.find(book => book.title === title)) return;
+        if (this.books.find(book => book.title === title)) return;
 
         // STEP 2: Create the new instance of the book & add it to the list
         const newBook = new Book(title, author, pages, hasRead);
-        this.list.push(newBook);
-        this.#libraryView.addToPending(newBook);
+        this.books.push(newBook);
 
-        console.log(this.#list);
+        console.log(this.#books);
     }
 
     /**
@@ -323,7 +322,7 @@ class LibraryModel {
      * @param {Function}    cmpFn Compares the a property of 2 books
      */
     sortBooks(cmpFn) {
-        this.list.sort((b1, b2) => cmpFn(b1, b2));
+        this.books.sort((b1, b2) => cmpFn(b1, b2));
     }
 }
 
