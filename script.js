@@ -313,6 +313,7 @@ class LibraryModel {
         // STEP 2: Create the new instance of the book & add it to the list
         const newBook = new Book(title, author, pages, hasRead);
         this.list.push(newBook);
+        this.#libraryView.addToPending(newBook);
 
         console.log(this.#list);
     }
@@ -349,7 +350,7 @@ class LibraryView {
     }
 
     /**
-     * @description Adds a book to the list of books to render
+     * @description Adds a book to the list of books to RENDER in the DOM
      * @param {Book} book 
      */
     addToPending(book) {
@@ -357,6 +358,10 @@ class LibraryView {
         this.#pending.push(book);
     }
 
+    /**
+     * @description Adds a book to the list of books to REMOVE from the DOM
+     * @param {Book} book 
+     */
     addToBin(book) {
         if (typeof book !== 'Book') return;
         this.#bin.push(book);
