@@ -163,56 +163,6 @@ class Book {
 }
 
 /**
- * @class LibraryModel
- * @description Stores a collection of 'Book' instances.
- */
-class LibraryModel {
-    
-    /**
-     * @description A list of books in the user library.
-     * @type {Array}
-     */
-    #list
-
-    constructor() {
-        this.#list = [];
-    }
-
-    get list() {
-        return this.#list;
-    }
-
-    /**
-     * @description     Adds a book into the library's list.
-     * @param {String}  title   The title of the book
-     * @param {String}  author  The person who wrote the book  
-     * @param {Number}  pages   The number of pages the book has
-     * @param {Boolean} hasRead Indicates if the book has been read
-     */
-    addBook(title, author, pages, hasRead) {
-
-        // STEP 1: Do not add the book if it's title exists
-        if (this.list.find(book => book.title === title)) return;
-
-        // STEP 2: Create the new instance of the book & add it to the list
-        const newBook = new Book(title, author, pages, hasRead);
-        this.list.push(newBook);
-
-
-
-        console.log(this.list);
-    }
-
-    /**
-     * @description         Sorts the list of books by a specific property.
-     * @param {Function}    cmpFn Compares the a property of 2 books
-     */
-    sortBooks(cmpFn) {
-        this.list.sort((b1, b2) => cmpFn(b1, b2));
-    }
-}
-
-/**
  * @class LibraryController
  * @description Handles event listeners for buttons
  */
@@ -227,14 +177,13 @@ class LibraryController {
 
     /**
      * @class LibraryModel
-     * @description An instance of the library model the controller will manipulate
      */
     #libraryModel;
 
-    constructor(libraryModel) {
+    constructor() {
 
         // STEP 1: Assign the LibraryModel
-        this.#libraryModel = libraryModel
+        this.#libraryModel = new LibraryModel();
         
         // STEP 2: Event for sorting books
         const sortByBtn = document.getElementById('sort-by');
@@ -323,17 +272,96 @@ class LibraryController {
 }
 
 /**
+ * @class LibraryModel
+ * @description Stores a collection of 'Book' instances.
+ */
+class LibraryModel {
+
+
+    /**
+     * @class LibraryView
+     */
+    #libraryView;
+    
+    /**
+     * @description A list of books in the user library.
+     * @type {Array}
+     */
+    #list;
+
+    constructor() {
+        this.#libraryView = new LibraryView();
+        this.#list = [];
+    }
+
+    get list() {
+        return this.#list;
+    }
+
+    /**
+     * @description     Adds a book into the library's list.
+     * @param {String}  title   The title of the book
+     * @param {String}  author  The person who wrote the book  
+     * @param {Number}  pages   The number of pages the book has
+     * @param {Boolean} hasRead Indicates if the book has been read
+     */
+    addBook(title, author, pages, hasRead) {
+
+        // STEP 1: Do not add the book if it's title exists
+        if (this.list.find(book => book.title === title)) return;
+
+        // STEP 2: Create the new instance of the book & add it to the list
+        const newBook = new Book(title, author, pages, hasRead);
+        this.list.push(newBook);
+
+        console.log(this.#list);
+    }
+
+    /**
+     * @description         Sorts the list of books by a specific property.
+     * @param {Function}    cmpFn Compares the a property of 2 books
+     */
+    sortBooks(cmpFn) {
+        this.list.sort((b1, b2) => cmpFn(b1, b2));
+    }
+}
+
+/**
  * @class LibraryView
  * @description Renders any changes of the LibraryModel that were 
  *              invoked by the LibraryController.
  */
 class LibraryView {
 
-    constructor() {
+    /**
+     * @description A queue of elements to be ADDED to the DOM
+     */
+    #pending;
 
+    /**
+     * @description A queue of elements to be REMOVED from the DOM
+     */
+    #bin;
+
+    constructor() {
+        this.#pending = [];
+        this.#bin = [];
+    }
+
+    /**
+     * @description Adds a book to the list of books to render
+     * @param {Book} book 
+     */
+    addToPending(book) {
+        if (typeof book !== 'Book') return;
+        this.#pending.push(book);
+    }
+
+    addToBin(book) {
+        if (typeof book !== 'Book') return;
+        this.#bin.push(book);
     }
 }
 
-// Set up the model, viewer & controller
-const model = new LibraryModel();
-const controller = new LibraryController(model);
+// Initialise the controller to set up the model & view
+const controller = new LibraryController();
