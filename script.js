@@ -334,38 +334,6 @@ class LibraryModel {
  */
 class LibraryView {
 
-    /**
-     * @description A queue of elements to be ADDED to the DOM
-     */
-    #pending;
-
-    /**
-     * @description A queue of elements to be REMOVED from the DOM
-     */
-    #bin;
-
-    constructor() {
-        this.#pending = [];
-        this.#bin = [];
-    }
-
-    /**
-     * @description Adds a book to the list of books to RENDER in the DOM
-     * @param {Book} book 
-     */
-    addToPending(book) {
-        if (typeof book !== 'Book') return;
-        this.#pending.push(book);
-    }
-
-    /**
-     * @description Adds a book to the list of books to REMOVE from the DOM
-     * @param {Book} book 
-     */
-    addToBin(book) {
-        if (typeof book !== 'Book') return;
-        this.#bin.push(book);
-    }
 }
 
 // Initialise the controller to set up the model & view
