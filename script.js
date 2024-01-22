@@ -197,7 +197,7 @@ class LibraryController {
         const submitBookBtn = document.getElementById('submit-book');
         const cancelBookBtn = document.getElementById('cancel-book');
         submitBookBtn.addEventListener('click', (e) => this.#addBook(e));
-        cancelBookBtn.addEventListener('click', () => this.#resetBookForm());
+        cancelBookBtn.addEventListener('click', (e) => this.#resetBookForm(e));
     }
 
     /**
@@ -232,9 +232,10 @@ class LibraryController {
     /**
      * @description Resets the book form after submission/cancellation
      */
-    #resetBookForm() {
+    #resetBookForm(e) {
 
         // STEP 1: Get the book values
+        e.preventDefault();
         let bookTitle = document.getElementById('book-title');
         let bookAuthor = document.getElementById('book-author');
         let bookPages = document.getElementById('book-pages');
@@ -256,7 +257,6 @@ class LibraryController {
         // STEP 1: Form validation
         const bookForm = document.querySelector('form[method="dialog"]');
         if (!bookForm.checkValidity()) return;
-        e.preventDefault();
 
         // STEP 2: Get the book values
         const bookTitle = document.getElementById('book-title').value;
@@ -272,7 +272,7 @@ class LibraryController {
         this.#libraryModel.addBook(bookTitle, bookAuthor, bookPages, bookStatusBoolean);
 
         // STEP 5: Reset the form
-        this.#resetBookForm();
+        this.#resetBookForm(e);
     }
 }
 
