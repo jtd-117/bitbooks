@@ -333,6 +333,25 @@ class LibraryModel {
  */
 class LibraryView {
 
+    /**
+     * @description Toggles a book's read status
+     */
+    static toggleReadStatus(e) {
+        if (e.target.classList.contains('read')) {
+            e.target.textContent = 'Unread';
+        } else {
+            e.target.textContent = 'Read';
+        }
+        e.target.classList.toggle('read');
+    }
+
+    /**
+     * @description Uploads a book to the DOM
+     * @param {Book} book 
+     */
+    uploadToDOM(book) {
+
+    }
 }
 
 // Initialise the controller to set up the model & view
