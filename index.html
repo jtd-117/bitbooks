@@ -28,18 +28,9 @@
         <dialog id="add-book-form">
             <form method="dialog">
                 <h2>Book Details:</h2>
-                <div class="label-input-container">
-                    <label for="book-title">Title:</label>
-                    <input type="text" id="book-title" name="book-title">
-                </div>
-                <div class="label-input-container">
-                    <label for="book-author">Author:</label>
-                    <input type="text" id="book-author" name="book-author">
-                </div>
-                <div class="label-input-container">
-                    <label for="book-pages">Pages:</label>
-                    <input type="number" id="book-pages" name="book-pages">
-                </div>
+                <input type="text" id="book-title" name="book-title" placeholder="Title" required>
+                <input type="text" id="book-author" name="book-author" placeholder="Author" required>
+                <input type="number" id="book-pages" name="book-pages" placeholder="Pages" required>
                 <div class="label-input-container">
                     <label for="book-status">Status:</label>
                     <select name="book-status" id="book-status">
@@ -47,8 +38,8 @@
                         <option value="unread">Unread</option>
                     </select>
                 </div>
-                <button id="cancel-book" formmethod="dialog" type="submit">Cancel</button>
-                <button id="submit-book" type="submit">Submit</button>
+                <button id="cancel-book" formmethod="dialog">Cancel</button>
+                <button id="submit-book">Submit</button>
             </form>
         </dialog>
 

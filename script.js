@@ -196,7 +196,7 @@ class LibraryController {
         // STEP 4: Event for form submission & cancellations
         const submitBookBtn = document.getElementById('submit-book');
         const cancelBookBtn = document.getElementById('cancel-book');
-        submitBookBtn.addEventListener('click', () => this.#addBook());
+        submitBookBtn.addEventListener('click', (e) => this.#addBook(e));
         cancelBookBtn.addEventListener('click', () => this.#resetBookForm());
     }
 
@@ -251,22 +251,27 @@ class LibraryController {
     /**
      * @description     Calls the LibraryModel to add a book
      */
-    #addBook() {
+    #addBook(e) {
 
-        // STEP 1: Get the book values
+        // STEP 1: Form validation
+        const bookForm = document.querySelector('form[method="dialog"]');
+        if (!bookForm.checkValidity()) return;
+        e.preventDefault();
+
+        // STEP 2: Get the book values
         const bookTitle = document.getElementById('book-title').value;
         const bookAuthor = document.getElementById('book-author').value;
         const bookPages = document.getElementById('book-pages').value;
         const bookStatus = document.getElementById('book-status').value;
-        
-        // STEP 2: Convert book status into a boolean
+
+        // STEP 3: Convert book status into a boolean
         let bookStatusBoolean = false;
         if (bookStatus === 'read') bookStatusBoolean = true;
 
-        // STEP 3: Call the library model to add the new book
+        // STEP 4: Call the library model to add the new book
         this.#libraryModel.addBook(bookTitle, bookAuthor, bookPages, bookStatusBoolean);
 
-        // STEP 4: Reset the form
+        // STEP 5: Reset the form
         this.#resetBookForm();
     }
 }
