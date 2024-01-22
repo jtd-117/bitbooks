@@ -268,8 +268,11 @@ class LibraryController {
         let bookStatusBoolean = false;
         if (bookStatus === 'read') bookStatusBoolean = true;
 
-        // STEP 4: Call the library model to add the new book
-        this.#libraryModel.addBook(bookTitle, bookAuthor, bookPages, bookStatusBoolean);
+        // STEP 4: If the book already exists, do not add it
+        if (!this.#libraryModel.addBook(bookTitle, bookAuthor, bookPages, bookStatusBoolean)) {
+            e.preventDefault();
+            return;
+        }
 
         // STEP 5: Reset the form
         this.#resetBookForm(e);
@@ -309,16 +312,18 @@ class LibraryModel {
      * @param {String}  author  The person who wrote the book  
      * @param {Number}  pages   The number of pages the book has
      * @param {Boolean} hasRead Indicates if the book has been read
+     * @returns {Boolean} true if the book was added, false otherwise
      */
     addBook(title, author, pages, hasRead) {
 
         // STEP 1: Do not add the book if it's title exists
-        if (this.books.find(book => book.title === title)) return;
+        if (this.books.find(book => book.title === title)) return false;
 
         // STEP 2: Create the new instance of the book & add it to the list
         const newBook = new Book(title, author, pages, hasRead);
         this.books.push(newBook);
         this.#libraryView.uploadBookToDOM(newBook);
+        return true
     }
 
     /**
