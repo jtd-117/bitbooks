@@ -313,8 +313,7 @@ class LibraryModel {
         // STEP 2: Create the new instance of the book & add it to the list
         const newBook = new Book(title, author, pages, hasRead);
         this.books.push(newBook);
-
-        console.log(this.#books);
+        this.#libraryView.uploadBookToDOM(newBook);
     }
 
     /**
@@ -334,6 +333,15 @@ class LibraryModel {
 class LibraryView {
 
     /**
+     * @description The div that stores all the books in the DOM;
+     */
+    #libraryDiv;
+
+    constructor() {
+        this.#libraryDiv = document.getElementById('library');
+    }
+
+    /**
      * @description Toggles a book's read status
      */
     static toggleReadStatus(e) {
@@ -349,8 +357,49 @@ class LibraryView {
      * @description Uploads a book to the DOM
      * @param {Book} book 
      */
-    uploadToDOM(book) {
+    uploadBookToDOM(book) {
 
+        // STEP 1: Ensure book is appropriate type
+        if (!book instanceof Book) return;
+
+        // STEP 2: Create the elements
+        const bookDiv = document.createElement('div');
+        const titleDiv = document.createElement('div');
+        const authorDiv = document.createElement('div');
+        const pagesDiv = document.createElement('div');
+        const statusBtn = document.createElement('button');
+        const deleteBtn = document.createElement('button');
+
+        bookDiv.classList.add('book');
+        titleDiv.classList.add('title');
+        authorDiv.classList.add('author');
+        pagesDiv.classList.add('pages');
+        statusBtn.classList.add('status');
+        deleteBtn.classList.add('delete');
+
+        // STEP 3: Populate elements with data
+        titleDiv.textContent = `${book.title}`;
+        authorDiv.textContent = `${book.author}`;
+        pagesDiv.textContent = `${book.pages} pages`;
+        deleteBtn.textContent = `Delete`;
+        
+        if (book.hasRead == true) {
+            statusBtn.classList.add('read');
+            statusBtn.textContent = 'Read';
+        } else {
+            statusBtn.textContent = 'Unread';
+        }
+
+        // STEP 4: Add event listeners
+        statusBtn.addEventListener('click', LibraryView.toggleReadStatus);
+
+        // STEP 5: Add element to DOM
+        bookDiv.appendChild(titleDiv);
+        bookDiv.appendChild(authorDiv);
+        bookDiv.appendChild(pagesDiv);
+        bookDiv.appendChild(statusBtn);
+        bookDiv.appendChild(deleteBtn);
+        this.#libraryDiv.appendChild(bookDiv);
     }
 }
 
