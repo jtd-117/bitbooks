@@ -180,10 +180,16 @@ class LibraryController {
      */
     #libraryModel;
 
+    /**
+     * @class LibraryView
+     */
+    #libraryView;
+
     constructor() {
 
-        // STEP 1: Assign the LibraryModel
+        // STEP 1: Assign the LibraryModel & LibraryView
         this.#libraryModel = new LibraryModel();
+        this.#libraryView = new LibraryView();
         
         // STEP 2: Event for sorting books
         const sortByBtn = document.getElementById('sort-by');
@@ -269,12 +275,15 @@ class LibraryController {
         if (bookStatus === 'read') bookStatusBoolean = true;
 
         // STEP 4: If the book already exists, do not add it
-        if (!this.#libraryModel.addBook(bookTitle, bookAuthor, bookPages, bookStatusBoolean)) {
+        const newBook = this.#libraryModel.addBook(bookTitle, bookAuthor, bookPages, bookStatusBoolean)
+        if (newBook === null) {
             e.preventDefault();
             return;
         }
+        // STEP 5: Upload the book to the DOM
+        this.#libraryView.uploadBookToDOM(newBook);
 
-        // STEP 5: Reset the form
+        // STEP 6: Reset the form
         this.#resetBookForm(e);
     }
 }
@@ -284,12 +293,6 @@ class LibraryController {
  * @description Stores a collection of 'Book' instances.
  */
 class LibraryModel {
-
-
-    /**
-     * @class LibraryView
-     */
-    #libraryView;
     
     /**
      * @description A list of books in the user library.
@@ -298,7 +301,6 @@ class LibraryModel {
     #books;
 
     constructor() {
-        this.#libraryView = new LibraryView();
         this.#books = [];
     }
 
@@ -312,20 +314,19 @@ class LibraryModel {
      * @param {String}  author  The person who wrote the book  
      * @param {Number}  pages   The number of pages the book has
      * @param {Boolean} hasRead Indicates if the book has been read
-     * @returns {Boolean} true if the book was added, false otherwise
+     * @returns {Book || null} The book that was added or null if was not
      */
     addBook(title, author, pages, hasRead) {
 
         // STEP 1: Do not add the book if it's title exists
         if (this.books.find(book => book.title === title) &&
             this.books.find(book => book.author === author && 
-            this.books.find(book => book.pages === pages))) return false;
+            this.books.find(book => book.pages === pages))) return null;
 
         // STEP 2: Create the new instance of the book & add it to the list
         const newBook = new Book(title, author, pages, hasRead);
         this.books.push(newBook);
-        this.#libraryView.uploadBookToDOM(newBook);
-        return true;
+        return newBook;
     }
 
     /**
