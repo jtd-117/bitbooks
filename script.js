@@ -317,13 +317,15 @@ class LibraryModel {
     addBook(title, author, pages, hasRead) {
 
         // STEP 1: Do not add the book if it's title exists
-        if (this.books.find(book => book.title === title)) return false;
+        if (this.books.find(book => book.title === title) &&
+            this.books.find(book => book.author === author && 
+            this.books.find(book => book.pages === pages))) return false;
 
         // STEP 2: Create the new instance of the book & add it to the list
         const newBook = new Book(title, author, pages, hasRead);
         this.books.push(newBook);
         this.#libraryView.uploadBookToDOM(newBook);
-        return true
+        return true;
     }
 
     /**
