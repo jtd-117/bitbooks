@@ -189,28 +189,28 @@ class LibraryController {
 
         // STEP 1: Assign the LibraryModel & LibraryView
         this.#libraryModel = new LibraryModel();
-        this.#libraryView = new LibraryView();
+        this.#libraryView = new LibraryView(this);
         
         // STEP 2: Event for sorting books
         const sortByBtn = document.getElementById('sort-by');
-        sortByBtn.addEventListener('change', () => this.#sortBooks(sortByBtn.value));
+        sortByBtn.addEventListener('change', () => this.sortBooks(sortByBtn.value));
 
         // STEP 3: Event for dialog-modal form popup
         const addBookBtn = document.getElementById('add-book');
-        addBookBtn.addEventListener('click', () => this.#openBookForm());
+        addBookBtn.addEventListener('click', () => this.openBookForm());
         
         // STEP 4: Event for form submission & cancellations
         const submitBookBtn = document.getElementById('submit-book');
         const cancelBookBtn = document.getElementById('cancel-book');
-        submitBookBtn.addEventListener('click', (e) => this.#addBook(e));
-        cancelBookBtn.addEventListener('click', (e) => this.#resetBookForm(e));
+        submitBookBtn.addEventListener('click', (e) => this.addBook(e));
+        cancelBookBtn.addEventListener('click', (e) => this.resetBookForm(e));
     }
 
     /**
      * @description     Calls the LibraryModel to sort the books
      * @param {String}  sortOption the method to sort the books
      */
-    #sortBooks(sortOption) {
+    sortBooks(sortOption) {
 
         if (sortOption === LibraryController.sortValues.ADDED) {
             this.#libraryModel.sortBooks(Book.cmpDateTimeAdded);
@@ -230,7 +230,7 @@ class LibraryController {
     /**
      * @description Opens up the add book form when clicking + button
      */
-    #openBookForm() {
+    openBookForm() {
         const addBookForm = document.getElementById('add-book-form');
         addBookForm.showModal();
     }
@@ -238,7 +238,7 @@ class LibraryController {
     /**
      * @description Resets the book form after submission/cancellation
      */
-    #resetBookForm(e) {
+    resetBookForm(e) {
 
         // STEP 1: Get the book values
         e.preventDefault();
@@ -258,7 +258,7 @@ class LibraryController {
     /**
      * @description     Calls the LibraryModel to add a book
      */
-    #addBook(e) {
+    addBook(e) {
 
         // STEP 1: Form validation
         const bookForm = document.querySelector('form[method="dialog"]');
@@ -284,7 +284,27 @@ class LibraryController {
         this.#libraryView.uploadBookToDOM(newBook);
 
         // STEP 6: Reset the form
-        this.#resetBookForm(e);
+        this.resetBookForm(e);
+    }
+
+    /**
+     * @description Deletes a book from the DOM
+     * @param {Event} e 
+     */
+    deleteBook(e) {
+
+        // STEP 1: Get the book details
+        const book = e.target.parentNode;
+        const title = book.children.item(0).textContent;
+        const author = book.children.item(1).textContent;
+        const pageMatch = book.children.item(2).textContent.match(/(\d+) pages/);
+        const pages = parseInt(pageMatch[0]);
+
+        // STEP 2: Delete the book from the LibraryModel
+        this.#libraryModel.deleteBook(title, author, pages);
+
+        // STEP 3: Delete the book from the DOM
+        this.#libraryView.removeBookFromDOM(book);
     }
 }
 
@@ -330,6 +350,17 @@ class LibraryModel {
     }
 
     /**
+     * @description Deletes a book from the array
+     * @param {String} title The title of the book
+     * @param {String} author The person who wrote the book 
+     * @param {Number} pages The number of pages the book has
+     */
+    deleteBook(title, author, pages) {
+        this.#books = this.books.filter(book => 
+            (book.title !== title && book.author !== author && book.pages !== pages));
+    }
+
+    /**
      * @description         Sorts the list of books by a specific property.
      * @param {Function}    cmpFn Compares the a property of 2 books
      */
@@ -350,8 +381,14 @@ class LibraryView {
      */
     #libraryDiv;
 
-    constructor() {
+    /**
+     * @class LibraryController
+     */
+    #libraryController
+
+    constructor(libraryController) {
         this.#libraryDiv = document.getElementById('library');
+        this.#libraryController = libraryController;
     }
 
     /**
@@ -364,6 +401,28 @@ class LibraryView {
             e.target.textContent = 'Read';
         }
         e.target.classList.toggle('read');
+    }
+
+    /**
+     * @description Removes a book from the DOM
+     * @param {EventTarget} bookDiv 
+     */
+    removeBookFromDOM(bookDiv) {
+        
+        // STEP 1: Get the child nodes
+        const title = bookDiv.children.item(0);
+        const pages = bookDiv.children.item(1);
+        const author = bookDiv.children.item(2);
+        const status = bookDiv.children.item(3);
+        const del = bookDiv.children.item(4);
+
+        // STEP 2: Remove the parent & childnodes
+        bookDiv.removeChild(title);
+        bookDiv.removeChild(pages);
+        bookDiv.removeChild(author);
+        bookDiv.removeChild(status);
+        bookDiv.removeChild(del);
+        this.#libraryDiv.removeChild(bookDiv);
     }
 
     /**
@@ -404,7 +463,8 @@ class LibraryView {
         }
 
         // STEP 4: Add event listeners
-        statusBtn.addEventListener('click', LibraryView.toggleReadStatus);
+        statusBtn.addEventListener('click', (e) => LibraryView.toggleReadStatus(e));
+        deleteBtn.addEventListener('click', (e) => this.#libraryController.deleteBook(e));
 
         // STEP 5: Add element to DOM
         bookDiv.appendChild(titleDiv);
