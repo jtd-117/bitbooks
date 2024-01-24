@@ -224,7 +224,7 @@ class LibraryController {
         } else {
             this.#libraryModel.sortBooks(Book.cmpPages);
         }
-        console.log(sortOption);
+        this.#libraryView.sortBooks(this.#libraryModel.books);
     }
     
     /**
@@ -461,7 +461,6 @@ class LibraryView {
         } else {
             statusBtn.textContent = 'Unread';
         }
-
         // STEP 4: Add event listeners
         statusBtn.addEventListener('click', (e) => LibraryView.toggleReadStatus(e));
         deleteBtn.addEventListener('click', (e) => this.#libraryController.deleteBook(e));
@@ -473,6 +472,19 @@ class LibraryView {
         bookDiv.appendChild(statusBtn);
         bookDiv.appendChild(deleteBtn);
         this.#libraryDiv.appendChild(bookDiv);
+    }
+
+    /**
+     * @description Sorts books on the DOM
+     * @param {Array} books 
+     */
+    sortBooks(books) {
+
+        // STEP 1: Clear the DOM
+        this.#libraryDiv.innerHTML = '';
+
+        // STEP 2: Iterate through the books
+        books.forEach((book) => this.uploadBookToDOM(book));
     }
 }
 
