@@ -60,7 +60,7 @@ class Book {
         this.#author = author;
         this.#pages = pages;
         this.#hasRead = hasRead;
-        this.#dateTimeAdded = null;
+        this.#dateTimeAdded = new Date();
     }
 
     get title() {
@@ -473,7 +473,6 @@ class LibraryView {
         bookDiv.appendChild(deleteBtn);
         this.#libraryDiv.appendChild(bookDiv);
     }
-
     /**
      * @description Sorts books on the DOM
      * @param {Array} books 
