@@ -1,6 +1,7 @@
 // Source: https://www.npmjs.com/package/scss-reset
 @use '../node_modules/scss-reset/reset';
 
+@use './fonts';
 @use './components/header';
 @use './components/content';
 @use './components/footer';
