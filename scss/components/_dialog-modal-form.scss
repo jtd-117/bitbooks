@@ -42,6 +42,11 @@ dialog {
             }
         }
 
+        input[type=text],
+        input[type=number] {
+            border-style: none none solid;
+        }
+        
         button {
             padding: 0.6rem;
             margin-block-start: 1rem;
