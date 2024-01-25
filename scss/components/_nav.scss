@@ -5,20 +5,37 @@
 }
 
 nav {
-    padding: 1rem;
+    padding: 1.2rem;
 
     display: flex;
     justify-content: center;
+    align-items: center;
 
     top: 0;
     position: sticky;
 
     background-color: whitesmoke;
     
-    font-family: 'comfortaa-semi-bold';
+    font-family: 'comfortaa-bold';
 
-    input,
-    .sort-container {
-        padding-inline: 4rem;
+    input[type=button] {
+        inline-size: 2rem;
+        block-size: 2rem;
+
+        margin-inline: 2rem;
+
+        border-radius: 50%;
+
+        color: white;
+        background-color: gray;
+
+        font-size: 2rem;
+    }
+
+    #sort-container {
+
+        select {
+            padding: 0.2rem;
+        }
     }
 }
