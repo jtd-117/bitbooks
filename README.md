@@ -13,6 +13,8 @@ A live showcase can be found by [clicking here](https://jtd-117.github.io/bitboo
 ## About:
 BitBooks is a web program that helps users track a list of books they have or intend to read. The app is fully responsive & allows users to sort books by the time they were added, by title, by author & by the number of pages the book has.
 
+<img src="assets/bitbooks-demo.gif" alt="BitBooks Demo">
+
 ## Design Pattern:
 BitBooks uses the [Model-View-Controller (MVC)](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) design pattern to assign clear responsibilities for each class. The LibraryModel class keeps track of book information within an array, the LibraryModel class handles events that manipulate the DOM & the LibraryController class handles the any UI that causes events to manipulate both the LibraryModel & the LibraryController.
 
