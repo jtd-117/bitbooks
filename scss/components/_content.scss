@@ -1,6 +1,7 @@
 
 @use './nav';
 @use './library';
+@use './dialog-modal-form';
 
 @mixin main-styles {
     main {
@@ -16,5 +17,6 @@ main {
     flex-grow: 1;
 
     @include nav.nav-styles;
+    @include dialog-modal-form.dialog-modal-form-styles;
     @include library.library-styles;
 }
