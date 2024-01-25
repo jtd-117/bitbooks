@@ -8,7 +8,7 @@
 4. [Notes](#notes)
 
 ## Live Showcase:
-A live showcase can be found by [clicking here]().
+A live showcase can be found by [clicking here](https://jtd-117.github.io/bitbooks/).
 
 ## About:
 BitBooks is a web program that helps users track a list of books they have or intend to read. The app is fully responsive & allows users to sort books by the time they were added, by title, by author & by the number of pages the book has.
