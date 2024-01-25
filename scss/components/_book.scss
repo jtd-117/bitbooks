@@ -6,11 +6,48 @@
 }
 
 .book {
-    padding: 1rem;
+    padding-inline: 2rem;
+    padding-block: 1rem;
 
     text-align: center;
     word-wrap: break-word;
 
     border: 1px solid black;
     border-radius: 10px;
+
+    font-family: 'comfortaa-regular';
+
+    box-shadow: 5px 5px;
+
+    div,
+    button {
+        margin-top: 1rem;
+
+        font-size: 1.2rem;
+    }
+
+    .title {
+
+        font-family: 'comfortaa-bold';
+        font-size: 1.6rem;
+
+        border: 1px solid black;
+        border-style: none none solid;
+    }
+
+    button {
+        padding: 0.6rem;
+        margin-inline: 0.2rem;
+        margin-block-start: 0.4rem;
+
+        color: white;
+        font-size: 1.2rem;
+
+        background-color: green;
+        border-radius: 10px;
+    }
+
+    button.delete {
+        background-color: blue;
+    }
 }
