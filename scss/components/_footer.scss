@@ -17,8 +17,14 @@ footer {
         font-family: 'comfortaa-regular';
         font-size: 1.2rem;
 
-        :hover {
-            color: red;
+        a {
+            color: #595959;
+            font-family: 'comfortaa-bold';
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
         }
     }
 }
